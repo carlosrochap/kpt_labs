@@ -36,15 +36,21 @@ public class IncidenceMatrixB {
       }
    }
    
-    public int[] search(String query) {
-       int[] docList = new int[0];
+    public ArrayList<Integer> search(String query) {
 
-        for (int i=0; i < termList.size(); i++) {
-            if (termList.get(i).equals(query)) {
-                docList = docLists.get(i);
+        ArrayList<Integer> result = new ArrayList<>();
+        int index = termList.indexOf(query);
+
+        if (index > -1) {
+            int[] docList = docLists.get(index);
+            for (int i=0; i < docList.length; i++) {
+                if (docList[i] == 1) {
+                    result.add(i);
+                }
             }
         }
-        return docList;
+
+        return result;
     }
    
    public String toString() {
@@ -75,14 +81,12 @@ public class IncidenceMatrixB {
 
       System.out.println(matrixB);
 
-       int[] res = matrixB.search(args[0]);
+       ArrayList<Integer> res = matrixB.search(args[0]);
 
-       if (res.length>0) {
+       if (res.size()>0) {
 
-           for (int i=0; i < res.length; i++){
-               if (res[i] == 1) {
-                   System.out.println(docs[i]);
-               }
+           for (Integer i : res) {
+               System.out.println(docs[i]);
            }
        } else {
            System.out.println("No results were found!");
