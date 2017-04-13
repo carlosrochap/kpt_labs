@@ -1,12 +1,13 @@
 import java.util.*;
 /**
+ * 612 LBE02 InvertedIndexB
  * 612 LBE02 InvertedIndexA
  * 612 LBE01 IncidenceMatrixC
  * Prof. Kang
  */
  
 //public class IncidenceMatrixD {         //LBE02
-public class InvertedIndexA {
+public class InvertedIndexB {
    //attributes
    private String[] myDocs;               //input docs
    private ArrayList<String> termList;    //dictionary
@@ -14,7 +15,7 @@ public class InvertedIndexA {
    private ArrayList<ArrayList<Integer>> docLists;
    
    //Constructor
-   public InvertedIndexA(String[] docs) { //LBE02
+   public InvertedIndexB(String[] docs) { //LBE02
       myDocs = docs;
       termList = new ArrayList<String>();
       //docLists = new ArrayList<int[]>();
@@ -61,6 +62,11 @@ public class InvertedIndexA {
       }
       return result;
     */
+    //LBE02C
+    int index = termList.indexOf(query);
+    if(index >=0) {
+      return docLists.get(index);
+    }
     return null;
    }
    
@@ -68,13 +74,16 @@ public class InvertedIndexA {
       String outputString = new String();
       for(int i=0;i<termList.size();i++) {
          outputString += String.format("%-15s", termList.get(i));
-         /*
-         int[] docList = docLists.get(i);
-         for(int j=0;j<docList.length;j++) {
-            outputString += docList[j] + "\t";
+         
+         //int[] docList = docLists.get(i);
+         ArrayList<Integer> docList = docLists.get(i);
+         //for(int j=0;j<docList.length;j++) {
+         for(int j=0;j<docList.size();j++) {
+            //outputString += docList[j] + "\t";
+            outputString += docList.get(j) + "\t";
          }
          outputString += "\n";
-         */
+         
       }
       return outputString;
    }
@@ -86,12 +95,12 @@ public class InvertedIndexA {
                        "nlp before text mining",
                        "nlp before text classification"};  
                        
-      InvertedIndexA matrix =  new InvertedIndexA(docs);
+      InvertedIndexB matrix =  new InvertedIndexB(docs);
       
-      //System.out.println(matrix);
+      System.out.println(matrix);
       
-      //LBE01D
-      /*
+      //LBE02B
+      
       if(args.length == 1) {
          System.out.println("Query: " + args[0]);
          ArrayList<Integer> result = matrix.search(args[0]);
@@ -99,6 +108,6 @@ public class InvertedIndexA {
             System.out.println(docs[i.intValue()]);
          }
       }
-      */               
+                   
    }
 }
