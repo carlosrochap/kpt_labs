@@ -30,6 +30,7 @@ public class EditDistance {
      * @return minimum edit distance distance between the terms
      */
     public int editDistanceDynamic(String s1, String s2){
+    	//matrix to store previous computations
         int[][] m = new int[s1.length()+1][s2.length()+1];
 
         for (int i=1; i < m.length; i++){
